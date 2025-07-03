@@ -153,7 +153,7 @@ class AutoSchoeberlTransfer(object):
                 return self.nodelist
 
         dim = V.mesh().topological_dimension()
-        bc = FixedDirichletBC(V, ufl.zero(V.ufl_element().value_shape()), nodelist)
+        bc = FixedDirichletBC(V, ufl.zero(V.value_shape), nodelist)
 
         return bc
 
