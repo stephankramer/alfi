@@ -126,7 +126,7 @@ class NavierStokesSolver(object):
             gamma = Constant(gamma)
         self.gamma = gamma
         if self.solver_type in ["simple", "lsc"]:
-            self.gamma.assign(0)
+            self.gamma.assign(0.)
             warning("Setting gamma to 0")
         self.advect = Constant(0)
 
@@ -260,10 +260,10 @@ class NavierStokesSolver(object):
 
         if re == 0:
             self.message(GREEN % ("Solving Stokes"))
-            self.advect.assign(0)
+            self.advect.assign(0.)
             self.nu.assign(self.char_L*self.char_U)
         else:
-            self.advect.assign(1)
+            self.advect.assign(1.)
             self.nu.assign(self.char_L*self.char_U/re)
         # self.gamma.assign(1+re)
 

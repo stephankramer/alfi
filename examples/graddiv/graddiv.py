@@ -161,7 +161,7 @@ gammas = [0, 1, 1e1, 1e2, 1e3, 1e4, 1e6, 1e8]
 iters = [">200"] * len(gammas)
 for i, gamma_ in enumerate(gammas):
     gamma.assign(gamma_)
-    u.assign(0)
+    u.assign(0.)
     if args.monitor:
         warning("Launching solve for gamma = %s." % gamma_)
     try:
