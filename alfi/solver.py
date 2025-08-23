@@ -115,7 +115,7 @@ class NavierStokesSolver(object):
         self.parallel = mh[0].comm.size > 1
         self.tdim = mh[0].topological_dimension()
         self.mh = mh
-        self.area = assemble(Constant(1, domain=mh[0])*dx)
+        self.area = assemble(Constant(1.0) * dx(domain=mh[0]))
         nu = Constant(1.0)
         self.nu = nu
         self.char_L = problem.char_length()
