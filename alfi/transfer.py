@@ -65,7 +65,7 @@ class CoarseCellMacroPatches(object):
 
         patches = []
 
-        tdim = mf.topological_dimension()
+        tdim = mf.topological_dimension
         for i, fine_firedrake in enumerate(coarse_to_fine_cell_map):
             # there are d+1 many coarse cells that all map to the same fine cells.
             # We only want to build the patch once, so skip repitions
@@ -152,7 +152,7 @@ class AutoSchoeberlTransfer(object):
             def nodes(self):
                 return self.nodelist
 
-        dim = V.mesh().topological_dimension()
+        dim = V.mesh().topological_dimension
         bc = FixedDirichletBC(V, ufl.zero(V.value_shape), nodelist)
 
         return bc

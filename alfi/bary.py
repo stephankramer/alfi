@@ -79,7 +79,7 @@ def BaryMeshHierarchy(mesh, refinement_levels, distribution_parameters=None, cal
             # of the boundary we're trying to conform to.  This
             # doesn't DTRT really for cubed sphere meshes (the
             # refined meshes are no longer gnonomic).
-            coords = cdm.getCoordinatesLocal().array.reshape(-1, mesh.geometric_dimension())
+            coords = cdm.getCoordinatesLocal().array.reshape(-1, mesh.geometric_dimension)
             scale = mesh._radius / np.linalg.norm(coords, axis=1).reshape(-1, 1)
             coords *= scale
 
@@ -90,13 +90,13 @@ def BaryMeshHierarchy(mesh, refinement_levels, distribution_parameters=None, cal
                            "exterior_facets", "boundary_faces",
                            FACE_SETS_LABEL)
 
-    barymeshes = [firedrake.Mesh(dm, dim=mesh.geometric_dimension(),
+    barymeshes = [firedrake.Mesh(dm, dim=mesh.geometric_dimension,
                                  distribution_parameters=distribution_parameters,
                                  comm=mesh.comm,
                                  reorder=reorder)
                            for dm in barydms]
 
-    meshes = [mesh] + [firedrake.Mesh(dm, dim=mesh.geometric_dimension(),
+    meshes = [mesh] + [firedrake.Mesh(dm, dim=mesh.geometric_dimension,
                                       distribution_parameters=distribution_parameters,
                                       comm=mesh.comm,
                                       reorder=reorder)
@@ -126,7 +126,7 @@ def BaryMeshHierarchy(mesh, refinement_levels, distribution_parameters=None, cal
         m._topology_dm.setRefineLevel(i)
         lgmaps.append((no, o))
 
-    d = mesh.topological_dimension()
+    d = mesh.topological_dimension
     bary_coarse_to_fine_cells = []
     bary_fine_to_coarse_cells = [None]
     for (coarseu, fineu), (coarse, fine), (clgmaps, flgmaps), uniform_coarse_to_fine \

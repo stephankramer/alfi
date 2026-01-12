@@ -113,7 +113,7 @@ class NavierStokesSolver(object):
         if hierarchy_callback is not None:
             mh = hierarchy_callback(mh)
         self.parallel = mh[0].comm.size > 1
-        self.tdim = mh[0].topological_dimension()
+        self.tdim = mh[0].topological_dimension
         self.mh = mh
         self.area = assemble(Constant(1.0) * dx(domain=mh[0]))
         nu = Constant(1.0)
@@ -139,7 +139,7 @@ class NavierStokesSolver(object):
         self.Z = Z
         comm = mesh.mpi_comm()
         if False:#comm.size == 1:
-            visbase = firedrake.Mesh(mesh._topology_dm.clone(), dim=mesh.geometric_dimension(),
+            visbase = firedrake.Mesh(mesh._topology_dm.clone(), dim=mesh.geometric_dimension,
                                      distribution_parameters=problem.distribution_parameters,
                                      reorder=True)
             vismh = MeshHierarchy(visbase, nref_vis)
@@ -572,7 +572,7 @@ class ConstantPressureSolver(NavierStokesSolver):
         return F
 
     def function_space(self, mesh, k):
-        tdim = mesh.topological_dimension()
+        tdim = mesh.topological_dimension
         if k < tdim:
             Pk = FiniteElement("Lagrange", mesh.ufl_cell(), k)
             FB = FiniteElement("FacetBubble", mesh.ufl_cell(), tdim)
