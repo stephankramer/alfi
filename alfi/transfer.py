@@ -8,6 +8,7 @@ from pyop2.datatypes import IntType
 from firedrake.mg.utils import *
 from pyop2.profiling import timed_function
 from alfi.bubble import BubbleTransfer
+import ufl
 
 
 class CoarseCellPatches(object):
@@ -213,7 +214,7 @@ class AutoSchoeberlTransfer(object):
             tildeu, rhs = Function(V), Function(V)
 
             bform = self.bform(rhs)
-            b = Function(V)
+            b = Cofunction(V.dual())
             problem = LinearVariationalProblem(a=a, L=0, u=tildeu, bcs=bcs)
             ctx = _SNESContext(problem, mat_type=self.patchparams["mat_type"],
                                pmat_type=self.patchparams["mat_type"],
